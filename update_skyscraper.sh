@@ -1,5 +1,13 @@
 #!/bin/bash
 {
+	# macOS - homebrew will install gnu-tar as gtar
+	TAR="tar"
+	command -v gtar >/dev/null 2>&1
+	if [ "$?" == "0" ]
+	then
+	    TAR="gtar"
+	fi
+	
     LATEST=`wget -q -O - "https://api.github.com/repos/muldjord/skyscraper/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'`
 
     if [ ! -f VERSION ]
@@ -21,7 +29,7 @@
 	echo "--- Fetching Skyscraper v.$LATEST ---"
 	wget -N https://github.com/muldjord/skyscraper/archive/${LATEST}.tar.gz || handle_error "fetch"
 	echo "--- Unpacking ---"
-	tar xvzf ${LATEST}.tar.gz --strip-components 1 --overwrite || handle_error "unpack"
+	$TAR xvzf ${LATEST}.tar.gz --strip-components 1 --overwrite || handle_error "unpack"
 	rm ${LATEST}.tar.gz
 	echo "--- Cleaning out old build if one exists ---"
 	make --ignore-errors clean

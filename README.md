@@ -35,7 +35,7 @@ You might be asked for your sudo password. On RetroPie the default password is `
 Skyscraper works perfectly on macOS as well but is not officially supported as I don't own a Mac. But with the help of HoraceAndTheSpider and abritinthebay here's the commands needed to install the Qt5 and other prerequisites:
 ```
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-$ brew install gnu-tar --with-default-names
+$ brew install gnu-tar
 $ brew install wget
 $ brew install qt5
 $ brew link qt5 --force
